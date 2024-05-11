@@ -10,8 +10,9 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { useAuth } from "../context/Auth/AuthContext";
-import { Button, Grid } from "@mui/material";
+import { Badge, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -36,9 +37,13 @@ function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/')
-    handleCloseUserMenu()
-  }
+    navigate("/");
+    handleCloseUserMenu();
+  };
+
+  const handleCart = () => {
+    navigate("/cart");
+  };
 
   return (
     <AppBar position="static">
@@ -75,7 +80,18 @@ function Navbar() {
                 Tech Hub
               </Typography>
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
+            <Box
+              gap={4}
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <IconButton aria-label="cart" onClick={handleCart}>
+                <Badge badgeContent={4} color="secondary">
+                  <ShoppingCart sx={{ color: "#ffffff" }} />
+                </Badge>
+              </IconButton>
               {isAuthenticated ? (
                 <>
                   <Tooltip title="Open settings">
